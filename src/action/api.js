@@ -1,11 +1,22 @@
 import axios from 'axios';
-export const CALL_API = 'CALL_API';
+export const KEYWORD_API = 'KEYWORD_API';
+export const RANDOM_API = 'RANDOM_API';
 
-export const callAPI = keyword => async dispatch => {
-  console.log('koko');
+export const keywordAPI = keyword => async dispatch => {
   const res = await axios.get(
     `https://collectionapi.metmuseum.org/public/collection/v1/search?q=${keyword}`
   );
+
   console.log(res);
-  // dispatch({ type: CALL_API, data: res.data });
+  // dispatch({ type: KEYWORD_API, data: res.data });
+};
+
+export const randomAPI = () => async dispatch => {
+  const randomNum = 1 + Math.floor(Math.random() * 471581);
+  console.log(randomNum);
+  const res = await axios.get(
+    `https://collectionapi.metmuseum.org/public/collection/v1/objects/${randomNum}`
+  );
+  console.log(res);
+  dispatch({ type: RANDOM_API, image: res.data.primaryImageSmall });
 };

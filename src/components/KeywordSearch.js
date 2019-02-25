@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { callAPI } from '../action/api';
+import { keywordAPI } from '../action/api';
 
 class KeywordSearch extends Component {
   state = { keyword: '' };
   handleSubmit = e => {
     e.preventDefault();
-    this.props.callAPI(e.target.value);
+    this.props.keywordAPI(e.target.value);
   };
   handleInput = e => {
     this.setState({ keyword: e.target.value });
@@ -21,12 +21,8 @@ class KeywordSearch extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  ...state
-});
-
 const mapDispatchToProps = dispatch => ({
-  callAPI: keyword => dispatch(callAPI(keyword))
+  keywordAPI: keyword => dispatch(keywordAPI(keyword))
 });
 
 export default connect(
